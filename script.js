@@ -1,11 +1,9 @@
 const noteTextarea = document.querySelector('#noteTextarea');
+const borderColorSelector = document.querySelector('#borderColorSelector')
 const saveNoteBtn = document.querySelector('#saveNoteBtn');
 const notesList = document.querySelector('#notesList');
 
-
 saveNoteBtn.addEventListener('click', saveNoteBtnClicked, false);
-
-
 
 function saveNoteBtnClicked() {
     var newNote = noteTextarea.value;
@@ -24,14 +22,15 @@ function saveNoteBtnClicked() {
         deleteBtn.setAttribute('class', 'border-0 px-2 mr-1 text-danger')
         deleteBtn.appendChild(document.createTextNode('Delete'))
 
+        borderColorSelecor.setAttribute('class', 'form-control')
+
         editBtn.addEventListener('click', function (e) {
-            // var note = e.parentNode
-            console.log(e.parentNode)
+            noteTextarea.value = newNote
+            notesList.removeChild(document.getElementById(newNote))
         }, false)
 
         deleteBtn.addEventListener('click', function (e) {
-            var note = e.parentNode
-            notesList.removeChild(note)
+            notesList.removeChild(document.getElementById(newNote))
         }, false)
 
         btnGroup.appendChild(editBtn)
@@ -39,22 +38,12 @@ function saveNoteBtnClicked() {
 
         card.setAttribute('class', 'card mb-3 p-3')
         card.setAttribute('id', newNote)
+        // card.style.borderColor = borderColorSelector.value
         card.appendChild(document.createTextNode(newNote))
         card.appendChild(btnGroup)
 
         notesList.appendChild(card)
     }
-
-    // Clear the textare.
+    // console.log(borderColorSelector.value)
     noteTextarea.value = '';
 }
-
-// function editNoteBtnClicked(e) {
-//     var note = e.parentNode.parentNode
-//     console.log(note)
-// }
-
-// function deleteNoteBtnClicked(e) {
-//     var note = e.parentNode.parentNode
-//     notesList.removeChild(note)
-// }
