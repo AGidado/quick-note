@@ -1,14 +1,17 @@
-const noteTextarea = document.querySelector('#noteTextarea');
+const noteTextarea = document.querySelector('#noteTextarea')
+const saveNoteBtn = document.querySelector('#saveNoteBtn')
+const notesList = document.querySelector('#notesList')
 const borderColorSelector = document.querySelector('#borderColorSelector')
-const saveNoteBtn = document.querySelector('#saveNoteBtn');
-const notesList = document.querySelector('#notesList');
 
-saveNoteBtn.addEventListener('click', saveNoteBtnClicked, false);
+saveNoteBtn.addEventListener('click', saveNoteBtnClicked, false)
 
+console.log()
 function saveNoteBtnClicked() {
-    var newNote = noteTextarea.value;
+    var newNote = noteTextarea.value
+    var color = borderColorSelector.options[borderColorSelector.options.selectedIndex].value
 
     if (newNote) {
+
         var card = document.createElement('div')
         var btnGroup = document.createElement('div')
         var editBtn = document.createElement('button')
@@ -22,8 +25,6 @@ function saveNoteBtnClicked() {
         deleteBtn.setAttribute('class', 'border-0 px-2 mr-1 text-danger')
         deleteBtn.appendChild(document.createTextNode('Delete'))
 
-        borderColorSelecor.setAttribute('class', 'form-control')
-
         editBtn.addEventListener('click', function (e) {
             noteTextarea.value = newNote
             notesList.removeChild(document.getElementById(newNote))
@@ -36,14 +37,13 @@ function saveNoteBtnClicked() {
         btnGroup.appendChild(editBtn)
         btnGroup.appendChild(deleteBtn)
 
-        card.setAttribute('class', 'card mb-3 p-3')
+        card.setAttribute('class', 'card mb-3 p-3 ' + String(color))
         card.setAttribute('id', newNote)
-        // card.style.borderColor = borderColorSelector.value
         card.appendChild(document.createTextNode(newNote))
         card.appendChild(btnGroup)
 
         notesList.appendChild(card)
+
+        noteTextarea.value = ''
     }
-    // console.log(borderColorSelector.value)
-    noteTextarea.value = '';
 }
