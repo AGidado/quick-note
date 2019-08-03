@@ -1,5 +1,18 @@
+/* Add your css styles here */
 body {
   background-color: #ebebeb;
+  color: #222;
+}
+
+.red,
+.teal,
+.cyan,
+.orange {
+    display: block;
+    background-color: white;
+    color: black;
+    margin-bottom: 20px;
+    padding: 20px;
 }
 
 .red {
