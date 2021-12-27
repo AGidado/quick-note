@@ -13,7 +13,7 @@ if(isset($_REQUEST)) {
 
     // insert to database
     $sql = "INSERT INTO note
-    (note, dive_colour)
+    (note, colour)
     VALUES ('$data->noteText', '$data->noteColor')";
 
     if ($con->query($sql) === TRUE) {
@@ -24,7 +24,7 @@ if(isset($_REQUEST)) {
       ]);
       exit(200);
     } else {
-      echo "Error: " . $conn->error;
+      echo "Error: " . $con->error;
     }
 
 }
