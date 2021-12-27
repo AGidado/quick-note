@@ -6,9 +6,13 @@ const borderColorSelector = document.querySelector('#borderColorSelector')
 
 saveNoteBtn.addEventListener('click', saveNoteBtnClicked, false)
 
+note = {
+    noteText: "text",
+    noteColor: "colour"
+};
+
 function saveNoteBtnClicked() {
     var newNote = noteTextarea.value
-
     if (newNote && borderColorSelector.options.selectedIndex !== 0) {
         var borderColor = borderColorSelector.options[borderColorSelector.options.selectedIndex].value
         var card = document.createElement('div')
@@ -48,6 +52,34 @@ function saveNoteBtnClicked() {
 
         noteTextarea.value = ''
         borderColorSelector.options.selectedIndex = 0
+
+        note.noteText = newNote;
+        note.noteColor = borderColor;
+
+            
+        fetch('http://localhost:8080/index.php', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(note),
+            })
+            .then(note => {
+                console.log('Success:', note);
+                //document.getElementById('#data').text =JSON.stringify(note);
+                //document.getElementById("data").appendChild(JSON.stringify(note));
+                var para = document.createElement("P");                       // Create a <p> node
+                var t = document.createTextNode(JSON.stringify(note));      // Create a text node
+                para.appendChild(t);                                          // Append the text to <p>
+                document.getElementById("data").appendChild(para);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+                            
+
+
     }
     else {
         window.alert('A note can neither be empty nor could it have no border color!')
